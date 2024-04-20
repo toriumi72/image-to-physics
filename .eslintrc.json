@@ -3,7 +3,6 @@
   "rules": {
     // 追加のルールをここに記述します
     "react/jsx-uses-react": "off",
-    "react/react-in-jsx-scope": "off",
-    "@typescript-eslint/no-unused-vars": "error"
+    "react/react-in-jsx-scope": "off"
   }
 }
