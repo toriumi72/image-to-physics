@@ -3,11 +3,11 @@
 import React, { useState } from 'react';
 
 export default function Home() {
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedImage, setSelectedImage] = useState<null | File>(null);
   const [responseText, setResponseText] = useState('');
 
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
+    const file = event.target.files?.[0] || null;
     setSelectedImage(file);
   };
 
@@ -18,14 +18,14 @@ export default function Home() {
     formData.append('image', selectedImage);
 
     try {
-      const response = await fetch('/api/upload', {
+      const response = await fetch('/api/v1/postOpenAiData', {
         method: 'POST',
         body: formData,
       });
 
       if (response.ok) {
         const data = await response.json();
-        setResponseText(data.text);
+        setResponseText(data);
         setSelectedImage(null);
       } else {
         console.error('Image upload failed');
